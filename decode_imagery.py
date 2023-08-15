@@ -65,6 +65,7 @@ if __name__ == "__main__":
     argparser.add_argument("--start_date", "-s", action="store")
     argparser.add_argument("--end_date", "-e", action="store")
     argparser.add_argument("--source_file", "-f", required=True, action="store")
+    argparser.add_argument("--prefix", "-p", action="store", default="")
     args = argparser.parse_args()
 
     start_datetime = (
@@ -109,8 +110,8 @@ if __name__ == "__main__":
     srcBGR = cv2.imread("output_raw.png", 0)
     rgb = cv2.cvtColor(srcBGR, cv2.COLOR_BayerGR2RGB)
     bw = cv2.cvtColor(srcBGR, cv2.COLOR_BayerGR2GRAY)
-    cv2.imwrite("output_rgb.png", rgb)
-    cv2.imwrite("output_bw.png", bw)
+    cv2.imwrite(f"{args.prefix}output_rgb.png", rgb)
+    cv2.imwrite(f"{args.prefix}output_bw.png", bw)
 
     # post process - fill in blanks
 
@@ -139,5 +140,5 @@ if __name__ == "__main__":
     srcBGR = cv2.imread("output_smooth_raw.png", 0)
     rgb = cv2.cvtColor(srcBGR, cv2.COLOR_BayerGR2RGB)
     bw = cv2.cvtColor(srcBGR, cv2.COLOR_BayerGR2GRAY)
-    cv2.imwrite("output_smooth_rgb.png", rgb)
-    cv2.imwrite("output_smooth_bw.png", bw)
+    cv2.imwrite(f"{args.prefix}output_smooth_rgb.png", rgb)
+    cv2.imwrite(f"{args.prefix}output_smooth_bw.png", bw)
